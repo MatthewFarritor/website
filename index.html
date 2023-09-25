@@ -3,6 +3,20 @@
     <head>
         <link rel="stylesheet" href="index.css">
     </head>
+    <script>
+
+        // script.js
+document.addEventListener("DOMContentLoaded", function () {
+    const dropdown = document.querySelector(".dropdown");
+    window.addEventListener("click", function (event) {
+        if (!dropdown.contains(event.target)) {
+            const dropdownContent = dropdown.querySelector(".dropdown-content");
+            dropdownContent.style.display = "none";
+        }
+    });
+});
+
+    </script>
 <body>
 
     <html lang="en">
@@ -16,9 +30,10 @@
             <div class="dropdown">
                 <button class="dropbtn">Dropdown</button>
                 <div class="dropdown-content">
-                    <a href="#">Item 1</a>
-                    <a href="#">Item 2</a>
-                    <a href="#">Item 3</a>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="Contact.html">Contact</a>
                 </div>
             </div>
             <script src="script.js"></script>
