@@ -1,1 +1,113 @@
-HELLO world 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: black;
+        }
+
+        canvas {
+            border: 2px solid white;
+        }
+    </style>
+    <title>Pong Game</title>
+</head>
+<body>
+    <canvas id="pongCanvas" width="800" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("pongCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Create the paddle
+        const paddleWidth = 10, paddleHeight = 60;
+        let leftPaddleY = canvas.height / 2 - paddleHeight / 2;
+        let rightPaddleY = canvas.height / 2 - paddleHeight / 2;
+        
+        // Create the ball
+        let ballX = canvas.width / 2;
+        let ballY = canvas.height / 2;
+        let ballSpeedX = 5;
+        let ballSpeedY = 5;
+
+        // Update the game state
+        function update() {
+            // Move the paddles
+            if (leftPaddleY < canvas.height - paddleHeight && rightPaddleY < canvas.height - paddleHeight) {
+                leftPaddleY += 5;
+                rightPaddleY += 5;
+            }
+
+            // Move the ball
+            ballX += ballSpeedX;
+            ballY += ballSpeedY;
+
+            // Bounce off the walls
+            if (ballY < 0 || ballY > canvas.height) {
+                ballSpeedY = -ballSpeedY;
+            }
+
+            // Bounce off the paddles
+            if (
+                (ballX < paddleWidth && ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight) ||
+                (ballX > canvas.width - paddleWidth && ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight)
+            ) {
+                ballSpeedX = -ballSpeedX;
+            }
+
+            // Reset ball position if it goes out of bounds
+            if (ballX < 0 || ballX > canvas.width) {
+                ballX = canvas.width / 2;
+                ballY = canvas.height / 2;
+            }
+        }
+
+        // Draw the game elements
+        function draw() {
+            // Clear the canvas
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the paddles
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
+            ctx.fillRect(canvas.width - paddleWidth, rightPaddleY, paddleWidth, paddleHeight);
+
+            // Draw the ball
+            ctx.beginPath();
+            ctx.arc(ballX, ballY, 5, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Game loop
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Handle keyboard input
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "ArrowUp" && rightPaddleY > 0) {
+                rightPaddleY -= 20;
+            } else if (event.key === "ArrowDown" && rightPaddleY < canvas.height - paddleHeight) {
+                rightPaddleY += 20;
+            } else if (event.key === "w" && leftPaddleY > 0) {
+                leftPaddleY -= 20;
+            } else if (event.key === "s" && leftPaddleY < canvas.height - paddleHeight) {
+                leftPaddleY += 20;
+            }
+        });
+
+        // Start the game loop
+        gameLoop();
+    </script>
+</body>
+</html>
