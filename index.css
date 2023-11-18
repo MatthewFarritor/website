@@ -1,7 +1,4 @@
 body
 { 
-    font-family: 'Times New Roman', serif;
-    text-align: center;
-    background-color: black;
-    color: white;
+   color: red !important;
 }
