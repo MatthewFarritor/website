@@ -5,6 +5,13 @@ body {
     color: white;
 }
 
+head {
+    font-family: 'Times New Roman', serif;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
 .big-words {
     font-size: 2em;
     margin-top: 50px;
