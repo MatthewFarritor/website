@@ -24,74 +24,91 @@
     <script>
         const canvas = document.getElementById("pongCanvas");
         const ctx = canvas.getContext("2d");
-    
-        let paddleY = canvas.height / 2 - 30;
+
+        let leftPaddleY = canvas.height / 2 - 30;
+        let rightPaddleY = canvas.height / 2 - 30;
+
         let ballX = canvas.width / 2;
         let ballY = canvas.height / 2;
         let ballSpeedX = 5;
         let ballSpeedY = 2;
-    
+
         function draw() {
             // Clear the canvas
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-            // Draw paddles
+
+            // Draw left paddle
             ctx.fillStyle = "white";
-            ctx.fillRect(10, paddleY, 10, 60);
-    
+            ctx.fillRect(10, leftPaddleY, 10, 60);
+
+            // Draw right paddle
+            ctx.fillStyle = "white";
+            ctx.fillRect(canvas.width - 20, rightPaddleY, 10, 60);
+
             // Draw ball
             ctx.beginPath();
             ctx.arc(ballX, ballY, 5, 0, 2 * Math.PI);
             ctx.fill();
             ctx.closePath();
         }
-    
+
         function update() {
             // Move ball
             ballX += ballSpeedX;
             ballY += ballSpeedY;
-    
+
             // Bounce off top and bottom
             if (ballY < 0 || ballY > canvas.height) {
                 ballSpeedY = -ballSpeedY;
             }
-    
-            // Bounce off paddle
-            if (ballX < 20 && ballY > paddleY && ballY < paddleY + 60) {
+
+            // Bounce off left paddle
+            if (ballX < 20 && ballY > leftPaddleY && ballY < leftPaddleY + 60) {
                 ballSpeedX = -ballSpeedX;
             }
-    
-            // Computer AI for the left paddle
-            if (paddleY + 30 < ballY) {
-                paddleY += 3;
-            } else if (paddleY + 30 > ballY) {
-                paddleY -= 3;
+
+            // Bounce off right paddle
+            if (ballX > canvas.width - 20 && ballY > rightPaddleY && ballY < rightPaddleY + 60) {
+                ballSpeedX = -ballSpeedX;
             }
-    
+
+            // Computer AI for the left paddle
+            if (leftPaddleY + 30 < ballY) {
+                leftPaddleY += 3;
+            } else if (leftPaddleY + 30 > ballY) {
+                leftPaddleY -= 3;
+            }
+
+            // Computer AI for the right paddle
+            if (rightPaddleY + 30 < ballY) {
+                rightPaddleY += 3;
+            } else if (rightPaddleY + 30 > ballY) {
+                rightPaddleY -= 3;
+            }
+
             // Reset ball if it goes out of bounds
             if (ballX < 0 || ballX > canvas.width) {
                 ballX = canvas.width / 2;
                 ballY = canvas.height / 2;
             }
         }
-    
+
         function gameLoop() {
             update();
             draw();
             requestAnimationFrame(gameLoop);
         }
-    
+
         document.addEventListener("keydown", function (event) {
-            if (event.key === "ArrowUp" && paddleY > 0) {
-                paddleY -= 10;
-            } else if (event.key === "ArrowDown" && paddleY < canvas.height - 60) {
-                paddleY += 10;
+            if (event.key === "ArrowUp" && rightPaddleY > 0) {
+                rightPaddleY -= 10;
+            } else if (event.key === "ArrowDown" && rightPaddleY < canvas.height - 60) {
+                rightPaddleY += 10;
             }
         });
-    
+
         gameLoop();
     </script>
-    
 </body>
 </html>
