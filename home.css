@@ -41,8 +41,3 @@ a {
   a:hover {
     text-decoration: underline;
   }
-  
-  a:active {
-    /* Add styles for active links if desired */
-  }
-  
