@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  #game-container {
+    position: relative;
+  }
+  
+  #game-board {
+    width: 400px;
+    height: 400px;
+    border: 1px solid #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .enemy, .tower {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background-color: #00f;
+  }
+  
+  .tower {
+    background-color: #0f0;
+  }
+  
