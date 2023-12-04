@@ -14,7 +14,7 @@
     
         .falling-letter {
           position: absolute;
-          color: #00f; /* Change the color if needed */
+          color: rgb(255, 255, 255); /* Change the color if needed */
           font-size: 16px;
           user-select: none;
         }
@@ -83,7 +83,7 @@
     
             if (distance < distanceThreshold) {
               // Apply repulsion effect
-              const force = 0.8; // Adjust this value for the strength of repulsion
+              const force = 1 ; // Adjust this value for the strength of repulsion
               const angle = Math.atan2(rect2.y - rect1.y, rect2.x - rect1.x);
     
               const forceX = force * Math.cos(angle);
