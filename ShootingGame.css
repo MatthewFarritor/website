@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #222;
+  }
+  
+  #game-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: #333;
+  }
+  
+  #player {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #00f;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .enemy {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #f00;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: moveEnemy linear infinite 2s;
+  }
+  
+  .bullet {
+    position: absolute;
+    width: 5px;
+    height: 10px;
+    background-color: #fff;
+  }
+  
