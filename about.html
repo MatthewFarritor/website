@@ -5,7 +5,7 @@
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Interactive Falling Letters with Physics</title>
+      <title>Interactive Falling Letters with Interactions</title>
       <style>
         body {
           margin: 0;
@@ -61,6 +61,36 @@
                 letterElement.style.top = (window.innerHeight - rect.height) + 'px';
                 letterElement.velocityY = -letterElement.velocityY * 0.7; // Bounce effect
               }
+    
+              // Check for interactions with other letters
+              for (const otherLetterElement of letterElements) {
+                if (otherLetterElement !== letterElement) {
+                  handleInteraction(letterElement, otherLetterElement);
+                }
+              }
+            }
+          }
+    
+          function handleInteraction(letterElement, otherLetterElement) {
+            const distanceThreshold = 30; // Adjust this value to control the interaction distance
+    
+            const rect1 = letterElement.getBoundingClientRect();
+            const rect2 = otherLetterElement.getBoundingClientRect();
+    
+            const distance = Math.sqrt(
+              Math.pow(rect1.x - rect2.x, 2) + Math.pow(rect1.y - rect2.y, 2)
+            );
+    
+            if (distance < distanceThreshold) {
+              // Apply repulsion effect
+              const force = 0.1; // Adjust this value for the strength of repulsion
+              const angle = Math.atan2(rect2.y - rect1.y, rect2.x - rect1.x);
+    
+              const forceX = force * Math.cos(angle);
+              const forceY = force * Math.sin(angle);
+    
+              letterElement.velocityY -= forceY;
+              otherLetterElement.velocityY += forceY;
             }
           }
     
