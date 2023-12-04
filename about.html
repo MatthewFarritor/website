@@ -5,7 +5,7 @@
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Interactive Falling Letters</title>
+      <title>Interactive Falling Letters with Physics</title>
       <style>
         body {
           margin: 0;
@@ -35,11 +35,12 @@
             letterElement.textContent = letter;
             document.body.appendChild(letterElement);
     
-            const position = Math.random() * window.innerWidth;
-            const animationDuration = Math.random() * 3 + 2; // between 2 and 5 seconds
+            // Initialize physics properties
+            letterElement.velocityY = 0;
+            letterElement.accelerationY = 0.1; // Adjust this value for gravity effect
     
+            const position = Math.random() * window.innerWidth;
             letterElement.style.left = position + 'px';
-            letterElement.style.animation = `fall ${animationDuration}s linear infinite`;
     
             letterElements.push(letterElement);
     
@@ -49,10 +50,16 @@
     
           function updateLettersPosition() {
             for (const letterElement of letterElements) {
+              // Update physics properties
+              letterElement.velocityY += letterElement.accelerationY;
+              letterElement.style.top = parseFloat(letterElement.style.top || 0) + letterElement.velocityY + 'px';
+    
               const rect = letterElement.getBoundingClientRect();
     
+              // Check for collision with the bottom of the viewport
               if (rect.bottom >= window.innerHeight) {
                 letterElement.style.top = (window.innerHeight - rect.height) + 'px';
+                letterElement.velocityY = -letterElement.velocityY * 0.7; // Bounce effect
               }
             }
           }
@@ -96,16 +103,9 @@
           }
     
           setInterval(createFallingLetter, 500);
-          setInterval(updateLettersPosition, 100);
+          setInterval(updateLettersPosition, 16); // Update at approximately 60 fps
         });
       </script>
-      <style>
-        @keyframes fall {
-          to {
-            transform: translateY(calc(100vh - var(--letter-height, 1em)));
-          }
-        }
-      </style>
     </body>
     </html>
     
