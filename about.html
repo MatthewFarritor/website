@@ -1,4 +1,90 @@
 <html lang="en">
     <link rel="stylesheet" href="home.css">
-
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Falling Letters</title>
+      <style>
+        body {
+          margin: 0;
+          overflow: hidden;
+        }
+    
+        .falling-letter {
+          position: absolute;
+          color: #00f; /* Change the color if needed */
+          font-size: 16px;
+        }
+      </style>
+    </head>
+    <body>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+          const letterElements = [];
+    
+          function createFallingLetter() {
+            const letter = document.createElement('span');
+            letter.className = 'falling-letter';
+            letter.textContent = letters.charAt(Math.floor(Math.random() * letters.length));
+            document.body.appendChild(letter);
+    
+            const position = Math.random() * window.innerWidth;
+            const animationDuration = Math.random() * 3 + 2; // between 2 and 5 seconds
+    
+            letter.style.left = position + 'px';
+            letter.style.animation = `fall ${animationDuration}s linear infinite`;
+    
+            letterElements.push(letter);
+          }
+    
+          function updateLettersPosition() {
+            for (const letter of letterElements) {
+              const rect = letter.getBoundingClientRect();
+    
+              if (rect.bottom >= window.innerHeight) {
+                letter.style.top = '0';
+                letter.style.left = Math.random() * window.innerWidth + 'px';
+              }
+            }
+          }
+    
+          function handleMouseMove(event) {
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+    
+            for (const letter of letterElements) {
+              const rect = letter.getBoundingClientRect();
+    
+              if (
+                mouseX >= rect.left &&
+                mouseX <= rect.right &&
+                mouseY >= rect.top &&
+                mouseY <= rect.bottom
+              ) {
+                letter.style.animation = 'none';
+                letter.style.top = mouseY + 'px';
+                letter.style.left = mouseX + 'px';
+              }
+            }
+          }
+    
+          document.addEventListener('mousemove', handleMouseMove);
+    
+          setInterval(createFallingLetter, 500);
+          setInterval(updateLettersPosition, 100);
+        });
+      </script>
+      <style>
+        @keyframes fall {
+          to {
+            transform: translateY(100vh);
+          }
+        }
+      </style>
+    </body>
+    </html>
+    
 </html>
