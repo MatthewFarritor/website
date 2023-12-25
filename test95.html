@@ -42,13 +42,16 @@
     <div class="button" id="button1" onmousedown="startDrag(event)">Button 1</div>
     <div class="button" id="button2" onmousedown="startDrag(event)">Button 2</div>
 
-    <div class="tab" id="tab">
+    <div class="tab" id="tab" onmousedown="startDragTab(event)">
         <div class="close-btn" onclick="closeTab()">X</div>
         <iframe id="tab-content" src="" frameborder="0" width="100%" height="100%"></iframe>
     </div>
 
     <script>
         const gridCellSize = 50;
+
+        let isDraggingTab = false;
+        let offsetX, offsetY;
 
         function startDrag(e) {
             let button = e.target;
@@ -78,6 +81,38 @@
             openTab(button.id);
         }
 
+        function startDragTab(e) {
+            let tab = document.getElementById('tab');
+            let rect = tab.getBoundingClientRect();
+
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+            isDraggingTab = true;
+
+            document.addEventListener('mousemove', moveTab);
+            document.addEventListener('mouseup', stopDragTab);
+        }
+
+        function moveTab(event) {
+            if (isDraggingTab) {
+                let x = event.clientX - offsetX;
+                let y = event.clientY - offsetY;
+
+                x = Math.round(x / gridCellSize) * gridCellSize;
+                y = Math.round(y / gridCellSize) * gridCellSize;
+
+                let tab = document.getElementById('tab');
+                tab.style.left = `${x}px`;
+                tab.style.top = `${y}px`;
+            }
+        }
+
+        function stopDragTab() {
+            isDraggingTab = false;
+            document.removeEventListener('mousemove', moveTab);
+            document.removeEventListener('mouseup', stopDragTab);
+        }
+
         function openTab(buttonId) {
             let tab = document.getElementById('tab');
             let tabContent = document.getElementById('tab-content');
@@ -104,3 +139,4 @@
     </script>
 </body>
 </html>
+
