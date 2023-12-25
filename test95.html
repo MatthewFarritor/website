@@ -39,8 +39,8 @@
     </style>
 </head>
 <body>
-    <div class="button" id="button1" onmousedown="startDrag(event)">Button 1</div>
-    <div class="button" id="button2" onmousedown="startDrag(event)">Button 2</div>
+    <div class="button" id="button1" onmousedown="startDrag(event)" onclick="openTab('button1')">Button 1</div>
+    <div class="button" id="button2" onmousedown="startDrag(event)" onclick="openTab('button2')">Button 2</div>
 
     <div class="tab" id="tab" onmousedown="startDragTab(event)">
         <div class="close-btn" onclick="closeTab()">X</div>
@@ -50,6 +50,7 @@
     <script>
         const gridCellSize = 50;
 
+        let isDragging = false;
         let isDraggingTab = false;
         let offsetX, offsetY;
 
@@ -77,8 +78,11 @@
             document.addEventListener('mousemove', moveButton);
             document.addEventListener('mouseup', stopDrag);
 
-            // Open the tab when the button is clicked
-            openTab(button.id);
+            // Prevent opening the tab when moving the button
+            isDragging = true;
+            setTimeout(() => {
+                isDragging = false;
+            }, 10);
         }
 
         function startDragTab(e) {
@@ -114,22 +118,24 @@
         }
 
         function openTab(buttonId) {
-            let tab = document.getElementById('tab');
-            let tabContent = document.getElementById('tab-content');
-            let button = document.getElementById(buttonId);
+            if (!isDragging) {
+                let tab = document.getElementById('tab');
+                let tabContent = document.getElementById('tab-content');
+                let button = document.getElementById(buttonId);
 
-            // Center the tab on the screen
-            let centerX = window.innerWidth / 2 - tab.offsetWidth / 2;
-            let centerY = window.innerHeight / 2 - tab.offsetHeight / 2;
+                // Center the tab on the screen
+                let centerX = window.innerWidth / 2 - tab.offsetWidth / 2;
+                let centerY = window.innerHeight / 2 - tab.offsetHeight / 2;
 
-            tab.style.left = `${centerX}px`;
-            tab.style.top = `${centerY}px`;
+                tab.style.left = `${centerX}px`;
+                tab.style.top = `${centerY}px`;
 
-            // Load content from a different HTML file into the iframe
-            tabContent.src = `content_${buttonId}.html`;
+                // Load content from a different HTML file into the iframe
+                tabContent.src = `content_${buttonId}.html`;
 
-            // Display the tab
-            tab.style.display = 'block';
+                // Display the tab
+                tab.style.display = 'block';
+            }
         }
 
         function closeTab() {
@@ -139,4 +145,3 @@
     </script>
 </body>
 </html>
-
