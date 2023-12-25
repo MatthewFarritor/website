@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Draggable and Resizable Buttons</title>
+    <title>Gridlocked Draggable Buttons</title>
     <style>
         body {
             margin: 0;
@@ -26,6 +26,8 @@
     <div class="button" id="button2" onmousedown="startDrag(event)">Button 2</div>
 
     <script>
+        const gridCellSize = 50; // Adjust the size of the grid cells as needed
+
         function startDrag(e) {
             let button = e.target;
             let offsetX = e.clientX - button.getBoundingClientRect().left;
@@ -34,6 +36,10 @@
             function moveButton(event) {
                 let x = event.clientX - offsetX;
                 let y = event.clientY - offsetY;
+
+                // Snap to the grid
+                x = Math.round(x / gridCellSize) * gridCellSize;
+                y = Math.round(y / gridCellSize) * gridCellSize;
 
                 button.style.left = `${x}px`;
                 button.style.top = `${y}px`;
