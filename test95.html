@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable and Resizable Buttons</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .button {
+            position: absolute;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="button" id="button1" draggable="true" onmousedown="startDrag(event)">Button 1</div>
+    <div class="button" id="button2" draggable="true" onmousedown="startDrag(event)">Button 2</div>
+
+    <script>
+        function startDrag(e) {
+            let button = e.target;
+            let offsetX = e.clientX - button.getBoundingClientRect().left;
+            let offsetY = e.clientY - button.getBoundingClientRect().top;
+
+            function moveButton(event) {
+                let x = event.clientX - offsetX;
+                let y = event.clientY - offsetY;
+
+                button.style.left = `${x}px`;
+                button.style.top = `${y}px`;
+            }
+
+            function stopDrag() {
+                document.removeEventListener('mousemove', moveButton);
+                document.removeEventListener('mouseup', stopDrag);
+            }
+
+            document.addEventListener('mousemove', moveButton);
+            document.addEventListener('mouseup', stopDrag);
+        }
+    </script>
+</body>
+</html>
