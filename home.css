@@ -7,7 +7,7 @@ body {
 
 header {
     color: rgb(0, 0, 0);
-   
+    text-align: center;
     font-family: 'Consolas', 'Monaco', monospace;
 }
 
@@ -23,7 +23,8 @@ nav {
 }
 
 .small-button {
- 
+    padding: 10px;
+    margin: 5px;
     font-size: 14px;
 }
 
