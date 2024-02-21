@@ -20,7 +20,7 @@ nav {
 .button-container {
     display: flex;
     justify-content: center;
-
+    text-align: center;
 }
 
 .small-button {
