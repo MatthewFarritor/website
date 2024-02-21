@@ -8,14 +8,14 @@ body {
 header {
     color: rgb(0, 0, 0);
     text-align: center;
-    padding: 20px;
+    padding: 5px;
     font-family: 'Consolas', 'Monaco', monospace;
 
 }
 
 nav {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .button-container {
