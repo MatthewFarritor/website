@@ -1,32 +1,28 @@
 body {
     font-family: 'Consolas', 'Monaco', monospace
-    margin 0;
-    padding: 0;
-    box-sizing: border-box;
+    
+    
 }
 
 header {
     color: rgb(0, 0, 0);
-    text-align: center;
-    padding: 5px;
+   
     font-family: 'Consolas', 'Monaco', monospace;
 }
 
 nav {
     text-align: center;
-    margin-top: 5px;
-    margin-bottom: 3px;
+
 }
 
 .button-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+
 }
 
 .small-button {
-    padding: 3px;
-    margin: 5px;
+ 
     font-size: 14px;
 }
 
