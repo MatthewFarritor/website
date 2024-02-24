@@ -56,3 +56,7 @@ a:link {
     background-color: transparent;
     text-decoration: none;
   }
+
+  on-page{
+    text-decoration: underline;
+  }
