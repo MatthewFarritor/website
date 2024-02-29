@@ -2,7 +2,6 @@ body {
     font-family: 'Consolas', 'Monaco', monospace;
     margin: 0;
     padding: 0; 
-    
 }
 
 header {
@@ -12,16 +11,10 @@ header {
     height: 35px;
 }
 
-nav {
-    text-align: center;
-
-}
-
 .button-container {
     display: flex;
     justify-content: center;
     text-align: center;
-
 }
 
 .small-button {
@@ -29,9 +22,7 @@ nav {
     margin: 1px;
     font-size: 14px;
     padding: 10px;
-    text-decoration: underline;
 }
-
 
 .big-button {
     padding: 15px;
@@ -45,12 +36,11 @@ a:link {
     text-decoration: none;
   }
   
-  a:visited {
+a:visited {
     color: rgb(64 64 64);
     background-color: transparent;
     text-decoration: none;
   }
-
-.on-page {
+.onPage{
     text-decoration: underline;
-  }
+}
