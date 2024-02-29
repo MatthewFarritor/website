@@ -29,15 +29,9 @@ nav {
     margin: 1px;
     font-size: 14px;
     padding: 10px;
+    text-decoration: underline;
 }
 
-.middle-button {
-    display: inline-block;
-    margin: 1px;
-    font-size: 14px;
-    padding: 10px;
-    text-align: center;
-}
 
 .big-button {
     padding: 15px;
@@ -57,6 +51,6 @@ a:link {
     text-decoration: none;
   }
 
-  on-page{
+.on-page {
     text-decoration: underline;
   }
