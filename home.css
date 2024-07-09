@@ -44,3 +44,34 @@ a:visited {
 .onPage{
     text-decoration: underline;
 }
+.text-container {
+    text-align: center;
+    margin-right: 300px; 
+    margin-left: 300px; 
+}
+
+.text-container p {
+    font-size: 16px; 
+    color: rgb(64 64 64);
+}
+
+h5 {
+    font-size: 16px; 
+    color: rgb(64 64 64);
+    margin-right: 150px; 
+    margin-left: 150px; 
+}
+
+h3 {
+    font-size: 16px; 
+    color: rgb(64 64 64);
+    margin-right: 150px; 
+    margin-left: 150px; 
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+
