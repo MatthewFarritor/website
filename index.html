@@ -3,262 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matthew Farritor's Interactive Windows 95-Style Page (Dark Mode)</title>
+    <title>Matthew Farritor - Dark Theme</title>
     <style>
-        body, html {
-            font-family: "MS Sans Serif", Arial, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-        }
-        #win95Window {
-            background-color: #303030;
-            border: 2px outset #505050;
-            width: 640px;
-            position: absolute;
-            top: 50px;
-            left: 50px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-        }
-        .title-bar {
-            background: linear-gradient(to right, #000000, #000000);
-            color: white;
-            padding: 2px 3px 3px 3px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: move;
-        }
-        .title-bar-text {
-            font-size: 13px;
-        }
-        .title-bar-controls button {
-            width: 16px;
-            height: 14px;
-            border: none;
-            background: #404040;
-            color: #ffffff;
-            font-size: 9px;
-            font-weight: bold;
-            padding: 0;
-            margin-left: 2px;
-            border: 1px outset #505050;
-            cursor: pointer;
-        }
-        .window-body {
-            margin: 8px;
-        }
-        .menu-bar {
-            background-color: #303030;
-            padding: 1px 3px;
-            border-bottom: 1px solid #505050;
-        }
-        .menu-bar button {
-            background-color: #303030;
-            border: 1px solid #303030;
-            padding: 2px 6px;
-            margin-right: 4px;
-            font-size: 11px;
-            color: #ffffff;
-        }
-        .menu-bar button:hover {
-            border: 1px outset #505050;
-        }
-        .content {
-            background-color: #202020;
-            border: 1px inset #505050;
-            padding: 10px;
-            margin-top: 10px;
-            height: 300px;
-            overflow-y: auto;
-            color: #e0e0e0;
-        }
-        h1, h2 {
-            font-size: 16px;
-            margin-top: 0;
-            color: #ffffff;
-        }
-        p, ul {
-            font-size: 12px;
-        }
-        .taskbar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 28px;
-            background-color: #303030;
-            border-top: 1px solid #505050;
-            display: flex;
-            align-items: center;
-            padding: 0 2px;
-        }
-        .start-button {
-            font-weight: bold;
-            padding: 1px 5px;
-            margin-right: 10px;
-            font-size: 11px;
-            border: 1px outset #505050;
-            background-color: #303030;
-            color: #ffffff;
-        }
-        .taskbar-button {
-            font-size: 11px;
-            padding: 1px 5px;
-            margin-right: 2px;
-            border: 1px outset #505050;
-            background-color: #303030;
-            min-width: 150px;
-            text-align: left;
-            color: #ffffff;
-        }
-        .taskbar-button.active {
-            border: 1px inset #202020;
-            background-color: #404040;
-        }
-        .desktop-icon {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 75px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .desktop-icon img {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 5px;
-            filter: invert(1);
-        }
-        .desktop-icon-text {
-            color: white;
-            font-size: 12px;
-            text-shadow: 1px 1px 1px black;
-        }
+        body, html { font-family: "MS Sans Serif", Arial, sans-serif; background-color: #1a1a1a; color: #e0e0e0; margin: 0; padding: 0; height: 100%; overflow: hidden; }
+        .win95Window { background-color: #2b2b2b; border: 2px outset #444; width: 90%; max-width: 640px; position: absolute; box-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .title-bar { background: linear-gradient(to right, #000080, #1084d0); color: white; padding: 2px 3px 3px 3px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .title-bar-text { font-size: 13px; }
+        .title-bar-controls button { width: 16px; height: 14px; border: 1px outset #444; background: #2b2b2b; color: #e0e0e0; font-size: 9px; font-weight: bold; padding: 0; margin-left: 2px; }
+        .window-body { margin: 8px; }
+        .menu-bar { background-color: #2b2b2b; padding: 1px 3px; border-bottom: 1px solid #444; }
+        .menu-bar button { background-color: #2b2b2b; border: 1px solid #2b2b2b; padding: 2px 6px; margin-right: 4px; font-size: 11px; color: #e0e0e0; }
+        .content { background-color: #1a1a1a; border: 1px inset #444; padding: 10px; margin-top: 10px; height: 300px; overflow-y: auto; color: #e0e0e0; }
+        .taskbar { position: fixed; bottom: 0; left: 0; right: 0; height: 28px; background-color: #2b2b2b; border-top: 1px solid #444; display: flex; align-items: center; padding: 0 2px; overflow-x: auto; }
+        .start-button, .taskbar-button { font-size: 11px; padding: 1px 5px; margin-right: 2px; border: 1px outset #444; background-color: #2b2b2b; color: #e0e0e0; white-space: nowrap; }
+        .start-button { font-weight: bold; margin-right: 10px; }
+        .taskbar-button { min-width: 100px; max-width: 150px; text-align: left; overflow: hidden; text-overflow: ellipsis; }
+        .desktop-icons { position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; align-items: flex-start; }
+        .desktop-icon { width: 64px; height: 64px; text-align: center; margin-bottom: 20px; }
+        .desktop-icon img { width: 32px; height: 32px; margin-bottom: 5px; filter: invert(1); }
+        .desktop-icon-text { color: #e0e0e0; font-size: 12px; text-shadow: 1px 1px 1px black; }
+        .minimized { display: none !important; }
+        .maximized { width: 100% !important; height: calc(100% - 28px) !important; top: 0 !important; left: 0 !important; max-width: none !important; }
+        .start-menu { display: none; position: absolute; bottom: 28px; left: 0; width: 200px; background-color: #2b2b2b; border: 2px outset #444; padding: 2px; z-index: 1000; }
+        .start-menu button { display: block; width: 100%; text-align: left; padding: 2px 5px; border: none; background: none; color: #e0e0e0; font-size: 11px; }
+        .start-menu button:hover { background-color: #000080; color: #fff; }
     </style>
 </head>
 <body>
-    <div class="desktop-icon" id="desktopIcon">
-        <img src="/api/placeholder/32/32" alt="My Website Icon">
-        <div class="desktop-icon-text">My Website</div>
+    <div class="desktop-icons">
+        <div class="desktop-icon" id="desktopIcon1"><img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png" alt="My Website Icon"><div class="desktop-icon-text">My Website</div></div>
+        <div class="desktop-icon" id="desktopIcon2"><img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" alt="Projects Icon"><div class="desktop-icon-text">Projects</div></div>
+        <div class="desktop-icon" id="desktopIcon3"><img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" alt="Blog Icon"><div class="desktop-icon-text">Blog</div></div>
+        <div class="desktop-icon" id="desktopIcon4"><img src="https://win98icons.alexmeub.com/icons/png/mail_envelope-0.png" alt="Contact Icon"><div class="desktop-icon-text">Contact</div></div>
     </div>
 
-    <div id="win95Window">
-        <div id="title-bar" class="title-bar">
-            <div class="title-bar-text">Matthew Farritor - Personal Website</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize">-</button>
-                <button aria-label="Maximize">□</button>
-                <button id="close-btn" aria-label="Close">×</button>
-            </div>
-        </div>
-        <div class="window-body">
-            <div class="menu-bar">
-                <button>File</button>
-                <button>Edit</button>
-                <button>View</button>
-                <button>Help</button>
-            </div>
-            <div class="content">
-                <h1>Welcome to Matthew Farritor's Personal Page</h1>
-                <p>Hello! This is my interactive Windows 95-style personal website with a dark mode twist. Feel free to move this window around or close it!</p>
-                
-                <h2>About Me</h2>
-                <p>I'm Matthew Farritor, a fan of retro computing and 90s nostalgia, with a love for dark mode interfaces.</p>
-                
-                <h2>My Interests</h2>
-                <ul>
-                    <li>Retro Computing</li>
-                    <li>Web Design</li>
-                    <li>90s Pop Culture</li>
-                    <li>Classic Video Games</li>
-                    <li>Dark Mode Everything</li>
-                </ul>
-                
-                <h2>Contact</h2>
-                <p>You can reach me at matthew@farritor.com (example email)</p>
-            </div>
-        </div>
-    </div>
     <div class="taskbar">
-        <button class="start-button">Start</button>
-        <button id="taskbarButton" class="taskbar-button active">Matthew Farritor - Personal Website</button>
+        <button id="startButton" class="start-button">Start</button>
+        <div id="taskbarButtons"></div>
+    </div>
+
+    <div id="startMenu" class="start-menu">
+        <button data-window="My Website">My Website</button>
+        <button data-window="Projects">Projects</button>
+        <button data-window="Blog">Blog</button>
+        <button data-window="Contact">Contact</button>
     </div>
 
     <script>
-        const win95Window = document.getElementById('win95Window');
-        const titleBar = document.getElementById('title-bar');
-        const closeBtn = document.getElementById('close-btn');
-        const taskbarButton = document.getElementById('taskbarButton');
-        const desktopIcon = document.getElementById('desktopIcon');
-        let isDragging = false;
-        let currentX;
-        let currentY;
-        let initialX;
-        let initialY;
-        let xOffset = 0;
-        let yOffset = 0;
+        function $(s) { return document.querySelector(s); }
+        function $$(s) { return document.querySelectorAll(s); }
+        function addEvent(e, ev, fn) { e && e.addEventListener(ev, fn); }
 
-        titleBar.addEventListener('mousedown', dragStart);
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('mouseup', dragEnd);
+        const startButton = $('#startButton'), startMenu = $('#startMenu'), taskbarButtons = $('#taskbarButtons');
+        let windows = [], zIndex = 1000;
 
-        function dragStart(e) {
-            initialX = e.clientX - xOffset;
-            initialY = e.clientY - yOffset;
-            if (e.target === titleBar || e.target.parentElement === titleBar) {
-                isDragging = true;
+        function createWindow(title, content) {
+            const existingWindow = windows.find(w => w.title === title);
+            if (existingWindow) {
+                existingWindow.element.style.zIndex = ++zIndex;
+                existingWindow.element.classList.remove('minimized');
+                existingWindow.taskbarBtn.classList.add('active');
+                return;
+            }
+
+            const winId = 'win_' + Date.now();
+            const win = document.createElement('div');
+            win.className = 'win95Window';
+            win.id = winId;
+            win.style.top = `${50 + windows.length * 30}px`;
+            win.style.left = `${50 + windows.length * 30}px`;
+            win.style.zIndex = ++zIndex;
+            win.innerHTML = `
+                <div class="title-bar">
+                    <div class="title-bar-text">${title}</div>
+                    <div class="title-bar-controls">
+                        <button class="minimizeBtn" aria-label="Minimize">-</button>
+                        <button class="maximizeBtn" aria-label="Maximize">□</button>
+                        <button class="closeBtn" aria-label="Close">×</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div class="menu-bar">
+                        <button>File</button>
+                        <button>Edit</button>
+                        <button>View</button>
+                        <button>Help</button>
+                    </div>
+                    <div class="content">${content}</div>
+                </div>
+            `;
+            document.body.appendChild(win);
+
+            const taskbarBtn = document.createElement('button');
+            taskbarBtn.className = 'taskbar-button active';
+            taskbarBtn.textContent = title;
+            taskbarBtn.dataset.winId = winId;
+            taskbarButtons.appendChild(taskbarBtn);
+
+            windows.push({ id: winId, title, element: win, taskbarBtn });
+            setupWindowEvents(win, taskbarBtn);
+            return win;
+        }
+
+        function setupWindowEvents(win, taskbarBtn) {
+            const titleBar = win.querySelector('.title-bar');
+            const minimizeBtn = win.querySelector('.minimizeBtn');
+            const maximizeBtn = win.querySelector('.maximizeBtn');
+            const closeBtn = win.querySelector('.closeBtn');
+            let isDragging = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+
+            addEvent(titleBar, 'mousedown', dragStart);
+            addEvent(titleBar, 'touchstart', dragStart);
+            addEvent(document, 'mousemove', drag);
+            addEvent(document, 'touchmove', drag);
+            addEvent(document, 'mouseup', dragEnd);
+            addEvent(document, 'touchend', dragEnd);
+            addEvent(win, 'mousedown', () => { win.style.zIndex = ++zIndex; });
+
+            addEvent(minimizeBtn, 'click', () => {
+                win.classList.add('minimized');
+                taskbarBtn.classList.remove('active');
+            });
+
+            addEvent(maximizeBtn, 'click', () => {
+                win.classList.toggle('maximized');
+                if (win.classList.contains('maximized')) {
+                    win.style.transform = 'none';
+                    xOffset = 0;
+                    yOffset = 0;
+                }
+            });
+
+            addEvent(closeBtn, 'click', () => {
+                win.remove();
+                taskbarBtn.remove();
+                windows = windows.filter(w => w.id !== win.id);
+            });
+
+            addEvent(taskbarBtn, 'click', () => {
+                if (win.classList.contains('minimized')) {
+                    win.classList.remove('minimized');
+                    taskbarBtn.classList.add('active');
+                    win.style.zIndex = ++zIndex;
+                } else {
+                    win.style.display = win.style.display === 'none' ? 'block' : 'none';
+                    taskbarBtn.classList.toggle('active');
+                }
+            });
+
+            function dragStart(e) {
+                e = e.type === 'touchstart' ? e.touches[0] : e;
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+                if (e.target === titleBar) isDragging = true;
+            }
+
+            function drag(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    e = e.type === 'touchmove' ? e.touches[0] : e;
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                    xOffset = currentX;
+                    yOffset = currentY;
+                    if (win.classList.contains('maximized')) {
+                        win.classList.remove('maximized');
+                        win.style.width = '90%';
+                        win.style.maxWidth = '640px';
+                        win.style.height = 'auto';
+                        initialX = e.clientX - win.offsetWidth / 2;
+                        initialY = e.clientY - titleBar.offsetHeight / 2;
+                    }
+                    win.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+                }
+            }
+
+            function dragEnd() {
+                initialX = currentX;
+                initialY = currentY;
+                isDragging = false;
             }
         }
 
-        function drag(e) {
-            if (isDragging) {
-                e.preventDefault();
-                currentX = e.clientX - initialX;
-                currentY = e.clientY - initialY;
-                xOffset = currentX;
-                yOffset = currentY;
-                setTranslate(currentX, currentY, win95Window);
-            }
+        const contents = {
+            'My Website': `<h1>Welcome to Matthew Farritor's Personal Page</h1><p>Hello! This is my interactive Windows 95-style personal website with a retro theme.</p>`,
+            'Projects': `<h1>My Projects</h1><ul><li>Windows 95 Style Website</li><li>Retro Game Emulator</li><li>Vintage Computer Restoration</li></ul>`,
+            'Blog': `<h1>Latest Blog Posts</h1><ul><li>The Resurrection of Windows 95 in Web Design</li><li>Why Retro is Always in Style</li><li>Nostalgia and Technology: A Perfect Blend</li></ul>`,
+            'Contact': `<h1>Get in Touch</h1><p>Email: matthew@farritor.com</p><p>Twitter: @matthewfarritor</p><p>GitHub: github.com/mfarritor</p>`
+        };
+
+        function openWindow(title) {
+            createWindow(title, contents[title] || "<p>Content not found.</p>");
         }
 
-        function dragEnd(e) {
-            initialX = currentX;
-            initialY = currentY;
-            isDragging = false;
-        }
-
-        function setTranslate(xPos, yPos, el) {
-            el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-        }
-
-        function toggleWindow() {
-            if (win95Window.style.display === 'none') {
-                win95Window.style.display = 'block';
-                taskbarButton.style.display = 'block';
-                taskbarButton.classList.add('active');
-            } else {
-                win95Window.style.display = 'none';
-                taskbarButton.classList.remove('active');
-            }
-        }
-
-        closeBtn.addEventListener('click', function() {
-            win95Window.style.display = 'none';
-            taskbarButton.style.display = 'none';
-            taskbarButton.classList.remove('active');
+        $$('.desktop-icon').forEach(icon => {
+            addEvent(icon, 'click', () => openWindow(icon.querySelector('.desktop-icon-text').textContent));
         });
 
-        taskbarButton.addEventListener('click', toggleWindow);
+        addEvent(startButton, 'click', () => startMenu.style.display = startMenu.style.display === 'none' ? 'block' : 'none');
 
-        desktopIcon.addEventListener('click', function() {
-            win95Window.style.display = 'block';
-            taskbarButton.style.display = 'block';
-            taskbarButton.classList.add('active');
+        addEvent(document, 'click', (e) => {
+            if (!startButton.contains(e.target) && !startMenu.contains(e.target)) startMenu.style.display = 'none';
+        });
+
+        $$('#startMenu button').forEach(button => {
+            addEvent(button, 'click', () => {
+                const windowName = button.dataset.window;
+                if (windowName) {
+                    openWindow(windowName);
+                }
+                startMenu.style.display = 'none';
+            });
         });
     </script>
 </body>
