@@ -123,7 +123,83 @@
         }
     
         function setupWindowEvents(win, taskbarBtn) {
-            // ... (setupWindowEvents function remains unchanged)
+            const titleBar = win.querySelector('.title-bar');
+            const minimizeBtn = win.querySelector('.minimizeBtn');
+            const maximizeBtn = win.querySelector('.maximizeBtn');
+            const closeBtn = win.querySelector('.closeBtn');
+            let isDragging = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+    
+            addEvent(titleBar, 'mousedown', dragStart);
+            addEvent(titleBar, 'touchstart', dragStart);
+            addEvent(document, 'mousemove', drag);
+            addEvent(document, 'touchmove', drag);
+            addEvent(document, 'mouseup', dragEnd);
+            addEvent(document, 'touchend', dragEnd);
+            addEvent(win, 'mousedown', () => { win.style.zIndex = ++zIndex; });
+    
+            addEvent(minimizeBtn, 'click', () => {
+                win.classList.add('minimized');
+                taskbarBtn.classList.remove('active');
+            });
+    
+            addEvent(maximizeBtn, 'click', () => {
+                win.classList.toggle('maximized');
+                if (win.classList.contains('maximized')) {
+                    win.style.transform = 'none';
+                    xOffset = 0;
+                    yOffset = 0;
+                }
+            });
+    
+            addEvent(closeBtn, 'click', () => {
+                win.remove();
+                taskbarBtn.remove();
+                windows = windows.filter(w => w.id !== win.id);
+            });
+    
+            addEvent(taskbarBtn, 'click', () => {
+                if (win.classList.contains('minimized')) {
+                    win.classList.remove('minimized');
+                    taskbarBtn.classList.add('active');
+                    win.style.zIndex = ++zIndex;
+                } else {
+                    win.style.display = win.style.display === 'none' ? 'block' : 'none';
+                    taskbarBtn.classList.toggle('active');
+                }
+            });
+    
+            function dragStart(e) {
+                e = e.type === 'touchstart' ? e.touches[0] : e;
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+                if (e.target === titleBar) isDragging = true;
+            }
+    
+            function drag(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    e = e.type === 'touchmove' ? e.touches[0] : e;
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                    xOffset = currentX;
+                    yOffset = currentY;
+                    if (win.classList.contains('maximized')) {
+                        win.classList.remove('maximized');
+                        win.style.width = '90%';
+                        win.style.maxWidth = '640px';
+                        win.style.height = 'auto';
+                        initialX = e.clientX - win.offsetWidth / 2;
+                        initialY = e.clientY - titleBar.offsetHeight / 2;
+                    }
+                    win.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+                }
+            }
+    
+            function dragEnd() {
+                initialX = currentX;
+                initialY = currentY;
+                isDragging = false;
+            }
         }
     
         function openMoreInfo(project) {
