@@ -46,19 +46,18 @@
          1px 1px #000;
     }
 
-    /* NAV */
+    /* NAVIGATION */
     .nav-center {
       text-align: center;
       margin-bottom: 20px;
     }
     nav a {
-      /* Keep them side by side at all sizes */
-      display: inline-block;
+      display: inline-block; /* Keeps links side by side */
       font-size: 24px;
-      margin: 0 20px;
+      margin: 0 10px; /* Reduced margin for better fit on mobile */
       text-decoration: none;
       color: #000;
-      border-bottom: 2px solid #000; 
+      border-bottom: 2px solid #000; /* Underline for individual links */
       text-shadow:
          1px 0 #000,
          0 1px #000,
@@ -91,7 +90,7 @@
     }
     ul {
       list-style-type: disc;
-      margin-left: 40px; 
+      margin-left: 40px; /* Indent list for clarity */
       margin-top: 10px;
     }
     li {
@@ -103,11 +102,9 @@
       h1 {
         font-size: 40px;
       }
-      /* Keep nav links side by side, just reduce spacing */
       nav a {
-        display: inline-block;
-        margin: 0 10px;
         font-size: 18px;
+        margin: 0 5px;
       }
       section h2 {
         font-size: 24px;
@@ -117,6 +114,9 @@
       }
       .container {
         padding: 10px;
+      }
+      ul {
+        margin-left: 20px; /* Reduce indentation on smaller screens */
       }
     }
   </style>
@@ -173,7 +173,7 @@
 
         <li>
           <strong>
-            <a href="https://www.amazon.com/Bible-Doctrine-Second-Essential-Teachings-dp-0310124301/dp/0310124301" target="_blank">
+            <a href="https://www.amazon.com/Bible-Doctrine-Second-Essential-Teachings-dp-0310124301" target="_blank">
               Bible Doctrine
             </a>
           </strong><br />
