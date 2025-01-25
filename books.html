@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Ensures the page scales properly on mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Matthew Farritor - Books</title>
   <style>
@@ -17,7 +18,7 @@
       background-color: #bfc2a2;
       color: #000;
       font-family: "Times New Roman", Times, serif;
-      text-align: center;
+      text-align: center; 
       margin: 0;
     }
 
@@ -38,7 +39,7 @@
       display: inline-block;
       white-space: nowrap;
       font-size: 64px;
-      border-bottom: 4px solid #000;
+      border-bottom: 4px solid #000; /* Underline the main heading */
       text-shadow:
          1px 0 #000,
          0 1px #000,
@@ -51,12 +52,13 @@
       margin-bottom: 20px;
     }
     nav a {
+      /* Keep them side by side at all sizes */
       display: inline-block;
       font-size: 24px;
       margin: 0 20px;
       text-decoration: none;
       color: #000;
-      border-bottom: 2px solid #000;
+      border-bottom: 2px solid #000; 
       text-shadow:
          1px 0 #000,
          0 1px #000,
@@ -76,7 +78,7 @@
       font-size: 32px;
       margin-bottom: 10px;
       display: inline-block;
-      border-bottom: 2px solid #000;
+      border-bottom: 2px solid #000; /* Underline subheading */
       text-shadow:
          1px 0 #000,
          0 1px #000,
@@ -89,7 +91,7 @@
     }
     ul {
       list-style-type: disc;
-      margin-left: 40px; /* Indent list for clarity */
+      margin-left: 40px; 
       margin-top: 10px;
     }
     li {
@@ -101,9 +103,10 @@
       h1 {
         font-size: 40px;
       }
+      /* Keep nav links side by side, just reduce spacing */
       nav a {
-        display: block;
-        margin: 10px 0;
+        display: inline-block;
+        margin: 0 10px;
         font-size: 18px;
       }
       section h2 {
@@ -121,18 +124,21 @@
 <body>
 
   <div class="container">
+    <!-- Centered Heading -->
     <div class="heading-center">
       <h1>Matthew Farritor</h1>
     </div>
 
+    <!-- Navigation (side by side for all screen sizes) -->
     <div class="nav-center">
       <nav>
-        <a href="about.html">about</a>
-        <a href="blog.html">blog</a>
+        <a href="index.html">about</a>
+        <a href="Blog.html">blog</a>
         <a href="books.html">books</a>
       </nav>
     </div>
 
+    <!-- Main Content -->
     <section>
       <h2>Books</h2>
       <p>
@@ -140,66 +146,104 @@
       </p>
       <ul>
         <li>
-          <strong><a href="https://www.amazon.com/ESV-Study-Bible-Bibles-Crossway/dp/1433502410" target="_blank">ESV Bible (Read Romans!)</a></strong><br />
-          </a>
+          <strong>
+            <a href="https://www.amazon.com/ESV-Study-Bible-Bibles-Crossway/dp/1433502410" target="_blank">
+              ESV Bible (Read Romans!)
+            </a>
+          </strong>
         </li>
 
         <li>
-          <strong><a href="https://www.amazon.com/Surely-Feynman-Adventures-Curious-Character/dp/0393316041" target="_blank">Surely You're Joking, Mr. Feynman!</strong> </a>
-            <br>by Richard Feynman<br /> 
-    
-          </a>
+          <strong>
+            <a href="https://www.amazon.com/Surely-Feynman-Adventures-Curious-Character/dp/0393316041" target="_blank">
+              Surely You're Joking, Mr. Feynman!
+            </a>
+          </strong><br />
+          by Richard Feynman
         </li>
 
         <li>
-          <strong><a href="https://www.amazon.com/Blitzed-Drugs-Third-Norman-Ohler/dp/1328663795" target="_blank"> Blitzed: Drugs in the Third Reich</strong></a> 
-            <br> by Norman Ohler<br/>
+          <strong>
+            <a href="https://www.amazon.com/Blitzed-Drugs-Third-Norman-Ohler/dp/1328663795" target="_blank">
+              Blitzed: Drugs in the Third Reich
+            </a>
+          </strong><br />
+          by Norman Ohler
         </li>
 
         <li>
-          <strong> <a href="https://www.amazon.com/Bible-Doctrine-Second-Essential-Teachings-dp-0310124301/dp/0310124301" target="_blank"> Bible Doctrin</a> </strong>
-          <br>by Wayne Grudem<br/>
+          <strong>
+            <a href="https://www.amazon.com/Bible-Doctrine-Second-Essential-Teachings-dp-0310124301/dp/0310124301" target="_blank">
+              Bible Doctrine
+            </a>
+          </strong><br />
+          by Wayne Grudem
         </li>
 
         <li>
-          <strong><a href="https://www.amazon.com/Julius-Caesar-Folger-Shakespeare-Library/dp/0743482743/" target="_blank">Julius Caesar</a></strong> 
-          <br>by William Shakespeare<br />
+          <strong>
+            <a href="https://www.amazon.com/Julius-Caesar-Folger-Shakespeare-Library/dp/0743482743/" target="_blank">
+              Julius Caesar
+            </a>
+          </strong><br />
+          by William Shakespeare
         </li>
 
         <li>
-          <strong><a href="https://www.amazon.com/Trembling-Penguin-Classics-Soren-Kierkegaard/dp/0140444491" target="_blank">Fear and Trembling</a></strong> 
-          <br> by Søren Kierkegaard<br />
+          <strong>
+            <a href="https://www.amazon.com/Trembling-Penguin-Classics-Soren-Kierkegaard/dp/0140444491" target="_blank">
+              Fear and Trembling
+            </a>
+          </strong><br />
+          by Søren Kierkegaard
         </li>
 
         <li>
-          <strong><a href="https://www.amazon.com/Fear-Loathing-Las-Vegas-American/dp/0679785892" target="_blank">Fear and Loathing in Las Vegas</a></strong> 
-          <br> by Hunter S. Thompson<br />
+          <strong>
+            <a href="https://www.amazon.com/Fear-Loathing-Las-Vegas-American/dp/0679785892" target="_blank">
+              Fear and Loathing in Las Vegas
+            </a>
+          </strong><br />
+          by Hunter S. Thompson
         </li>
 
         <li>
-          <strong><a href="https://www.amazon.com/Auschwitz-Doctors-Eyewitness-Miklos-Nyiszli/dp/1559702028" target="_blank"> Auschwitz: A Doctor's Eyewitness Account</a></strong> 
-          <br> by Miklos Nyiszli<br />
+          <strong>
+            <a href="https://www.amazon.com/Auschwitz-Doctors-Eyewitness-Miklos-Nyiszli/dp/1559702028" target="_blank">
+              Auschwitz: A Doctor's Eyewitness Account
+            </a>
+          </strong><br />
+          by Miklos Nyiszli
         </li>
 
         <li>
-          <strong><a href="https://www.amazon.com/Old-Man-Sea-Ernest-Hemingway/dp/B0DTG7XW9Q" target="_blank">The Old Man and the Sea</a></strong> 
-          <br> </bnr>by Ernest Hemingway <br />
-         
+          <strong>
+            <a href="https://www.amazon.com/Old-Man-Sea-Ernest-Hemingway/dp/B0DTG7XW9Q" target="_blank">
+              The Old Man and the Sea
+            </a>
+          </strong><br />
+          by Ernest Hemingway
         </li>
 
         <li>
-          <strong><a href="https://www.amazon.com/Country-Old-Men-Cormac-McCarthy/dp/0375706674" target="_blank">No Country for Old Men</a></strong> 
-          <br> by Cormac McCarthy<br />
+          <strong>
+            <a href="https://www.amazon.com/Country-Old-Men-Cormac-McCarthy/dp/0375706674" target="_blank">
+              No Country for Old Men
+            </a>
+          </strong><br />
+          by Cormac McCarthy
         </li>
 
         <li>
-          <strong><a href="https://www.amazon.com/Fight-Club-Novel-Chuck-Palahniuk/dp/0393327345" target="_blank">Fight Club: A Novel</a></strong>
-          <br> by Chuck Palahniuk
-          <br />
+          <strong>
+            <a href="https://www.amazon.com/Fight-Club-Novel-Chuck-Palahniuk/dp/0393327345" target="_blank">
+              Fight Club: A Novel
+            </a>
+          </strong><br />
+          by Chuck Palahniuk
         </li>
       </ul>
     </section>
-
   </div>
 
 </body>
