@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matthew Farritor</title>
+    <style>
+        body, html { font-family: "MS Sans Serif", Arial, sans-serif; background-color: #1a1a1a; color: #e0e0e0; margin: 0; padding: 0; height: 100%; overflow: hidden; }
+        .win95Window { background-color: #2b2b2b; border: 2px outset #444; width: 90%; max-width: 640px; position: absolute; box-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .title-bar { background: linear-gradient(to right, #000080, #1084d0); color: white; padding: 2px 3px 3px 3px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .title-bar-text { font-size: 13px; }
+        .title-bar-controls button { width: 16px; height: 14px; border: 1px outset #444; background: #2b2b2b; color: #e0e0e0; font-size: 9px; font-weight: bold; padding: 0; margin-left: 2px; }
+        .window-body { margin: 8px; }
+        .menu-bar { background-color: #2b2b2b; padding: 1px 3px; border-bottom: 1px solid #444; }
+        .menu-bar button { background-color: #2b2b2b; border: 1px solid #2b2b2b; padding: 2px 6px; margin-right: 4px; font-size: 11px; color: #e0e0e0; }
+        .content { background-color: #1a1a1a; border: 1px inset #444; padding: 10px; margin-top: 10px; height: 300px; overflow-y: auto; color: #e0e0e0; }
+        .taskbar { position: fixed; bottom: 0; left: 0; right: 0; height: 28px; background-color: #2b2b2b; border-top: 1px solid #444; display: flex; align-items: center; padding: 0 2px; overflow-x: auto; }
+        .start-button, .taskbar-button { font-size: 11px; padding: 1px 5px; margin-right: 2px; border: 1px outset #444; background-color: #2b2b2b; color: #e0e0e0; white-space: nowrap; }
+        .start-button { font-weight: bold; margin-right: 10px; }
+        .taskbar-button { min-width: 100px; max-width: 150px; text-align: left; overflow: hidden; text-overflow: ellipsis; }
+        .desktop-icons { position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; align-items: flex-start; }
+        .desktop-icon { width: 64px; height: 64px; text-align: center; margin-bottom: 20px; }
+        .desktop-icon img { width: 32px; height: 32px; margin-bottom: 5px; filter: invert(1); }
+        .desktop-icon-text { color: #e0e0e0; font-size: 12px; text-shadow: 1px 1px 1px black; }
+        .minimized { display: none !important; }
+        .maximized { width: 100% !important; height: calc(100% - 28px) !important; top: 0 !important; left: 0 !important; max-width: none !important; }
+        .start-menu { display: none; position: absolute; bottom: 28px; left: 0; width: 200px; background-color: #2b2b2b; border: 2px outset #444; padding: 2px; z-index: 1000; }
+        .start-menu button { display: block; width: 100%; text-align: left; padding: 2px 5px; border: none; background: none; color: #e0e0e0; font-size: 11px; }
+        .start-menu button:hover { background-color: #000080; color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="desktop-icons">
+        <div class="desktop-icon" id="desktopIcon1"><img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png" alt="My Website Icon"><div class="desktop-icon-text">My Website</div></div>
+        <div class="desktop-icon" id="desktopIcon2"><img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" alt="Projects Icon"><div class="desktop-icon-text">Projects</div></div>
+        <div class="desktop-icon" id="desktopIcon3"><img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" alt="Blog Icon"><div class="desktop-icon-text">Blog</div></div>
+        <div class="desktop-icon" id="desktopIcon4"><img src="https://win98icons.alexmeub.com/icons/png/envelope_closed-0.png" alt="Contact Icon"><div class="desktop-icon-text">Contact</div></div>
+    </div>
+
+    <div class="taskbar">
+        <button id="startButton" class="start-button">Start</button>
+        <div id="taskbarButtons"></div>
+    </div>
+
+    <div id="startMenu" class="start-menu">
+        <button data-window="My Website">My Website</button>
+        <button data-window="Projects">Projects</button>
+        <button data-window="Blog">Blog</button>
+        <button data-window="Contact">Contact</button>
+    </div>
+
+    <script>
+        function $(s) { return document.querySelector(s); }
+        function $$(s) { return document.querySelectorAll(s); }
+        function addEvent(e, ev, fn) { e && e.addEventListener(ev, fn); }
+    
+        const startButton = $('#startButton'), startMenu = $('#startMenu'), taskbarButtons = $('#taskbarButtons');
+        let windows = [], zIndex = 1000;
+    
+        const contents = {
+            'My Website': `<h1>Matthew Farritor</h1>
+                           <p>Hi, I'm Matthew Farritor. I am a high school senior. I like tech, engineering, books (if you have any suggestions let me know), art and movies. Welcome to my website!</p>`,
+            'Projects': `<h1>Projects</h1>
+                         <ul>
+                             <li><a href="https://end.bz/" target="_blank">end.bz</a></li>
+                             <li><a href="https://x.com/FarSideBot" target="_blank">far side bot</a> <a href="#" onclick="openMoreInfo('farSideBot'); return false;">more</a></li>
+                         </ul>`,
+            'Blog': `<h1>Blog</h1>
+                     <ul>
+                         <li>soon</li>
+                     </ul>`,
+            'Contact': `<h1>Contact</h1>
+                        <p>X dot com the everything app: <a href="https://x.com/MatthewFarritor"> @matthewfarritor </a> </p>`
+        };
+    
+        function createWindow(title, content) {
+            const existingWindow = windows.find(w => w.title === title);
+            if (existingWindow) {
+                existingWindow.element.style.zIndex = ++zIndex;
+                existingWindow.element.classList.remove('minimized');
+                existingWindow.taskbarBtn.classList.add('active');
+                return;
+            }
+    
+            const winId = 'win_' + Date.now();
+            const win = document.createElement('div');
+            win.className = 'win95Window';
+            win.id = winId;
+            win.style.top = `${50 + windows.length * 30}px`;
+            win.style.left = `${50 + windows.length * 30}px`;
+            win.style.zIndex = ++zIndex;
+    
+            win.innerHTML = `
+                <div class="title-bar">
+                    <div class="title-bar-text">${title}</div>
+                    <div class="title-bar-controls">
+                        <button class="minimizeBtn" aria-label="Minimize">-</button>
+                        <button class="maximizeBtn" aria-label="Maximize">□</button>
+                        <button class="closeBtn" aria-label="Close">×</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div class="menu-bar">
+                        <button>File</button>
+                        <button>Edit</button>
+                        <button>View</button>
+                        <button>Help</button>
+                    </div>
+                    <div class="content">${content}</div>
+                </div>
+            `;
+            document.body.appendChild(win);
+    
+            const taskbarBtn = document.createElement('button');
+            taskbarBtn.className = 'taskbar-button active';
+            taskbarBtn.textContent = title;
+            taskbarBtn.dataset.winId = winId;
+            taskbarButtons.appendChild(taskbarBtn);
+    
+            windows.push({ id: winId, title, element: win, taskbarBtn });
+            setupWindowEvents(win, taskbarBtn);
+            return win;
+        }
+    
+        function setupWindowEvents(win, taskbarBtn) {
+            const titleBar = win.querySelector('.title-bar');
+            const minimizeBtn = win.querySelector('.minimizeBtn');
+            const maximizeBtn = win.querySelector('.maximizeBtn');
+            const closeBtn = win.querySelector('.closeBtn');
+            let isDragging = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+    
+            addEvent(titleBar, 'mousedown', dragStart);
+            addEvent(titleBar, 'touchstart', dragStart);
+            addEvent(document, 'mousemove', drag);
+            addEvent(document, 'touchmove', drag);
+            addEvent(document, 'mouseup', dragEnd);
+            addEvent(document, 'touchend', dragEnd);
+            addEvent(win, 'mousedown', () => { win.style.zIndex = ++zIndex; });
+    
+            addEvent(minimizeBtn, 'click', () => {
+                win.classList.add('minimized');
+                taskbarBtn.classList.remove('active');
+            });
+    
+            addEvent(maximizeBtn, 'click', () => {
+                win.classList.toggle('maximized');
+                if (win.classList.contains('maximized')) {
+                    win.style.transform = 'none';
+                    xOffset = 0;
+                    yOffset = 0;
+                }
+            });
+    
+            addEvent(closeBtn, 'click', () => {
+                win.remove();
+                taskbarBtn.remove();
+                windows = windows.filter(w => w.id !== win.id);
+            });
+    
+            addEvent(taskbarBtn, 'click', () => {
+                if (win.classList.contains('minimized')) {
+                    win.classList.remove('minimized');
+                    taskbarBtn.classList.add('active');
+                    win.style.zIndex = ++zIndex;
+                } else {
+                    win.style.display = win.style.display === 'none' ? 'block' : 'none';
+                    taskbarBtn.classList.toggle('active');
+                }
+            });
+    
+            function dragStart(e) {
+                e = e.type === 'touchstart' ? e.touches[0] : e;
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+                if (e.target === titleBar) isDragging = true;
+            }
+    
+            function drag(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    e = e.type === 'touchmove' ? e.touches[0] : e;
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                    xOffset = currentX;
+                    yOffset = currentY;
+                    if (win.classList.contains('maximized')) {
+                        win.classList.remove('maximized');
+                        win.style.width = '90%';
+                        win.style.maxWidth = '640px';
+                        win.style.height = 'auto';
+                        initialX = e.clientX - win.offsetWidth / 2;
+                        initialY = e.clientY - titleBar.offsetHeight / 2;
+                    }
+                    win.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+                }
+            }
+    
+            function dragEnd() {
+                initialX = currentX;
+                initialY = currentY;
+                isDragging = false;
+            }
+        }
+    
+        function openMoreInfo(project) {
+            let moreInfo = '';
+            switch(project) {
+                case 'farSideBot':
+                    moreInfo = `
+                        <h2>Far Side Bot</h2>
+                        <p>The Far Side Bot is a Twitter bot that posts random panels from Gary Larson's The Far Side comic series.</p>
+                        <p> I made it in about 5 hours, so it might be a bit buggy. 
+                            Time will tell. I had to manually scrape the comics, so there might not be enough. 
+                            (Trying to scrape the internet is frustrating.) There are only 500 that it can post. (500/4,337) 
+                            Thanks, Luke, for helping me run it on a server.
+                             </p>
+                        <p>Follow <a href="https://x.com/FarSideBot" target="_blank">@FarSideBot</a> </p>
+                    `;
+                    break;
+                default:
+                    moreInfo = '<p>No additional information available for this project.</p>';
+            }
+            createWindow(`${project} - More Info`, moreInfo);
+        }
+    
+        function openWindow(title) {
+            createWindow(title, contents[title] || "<p>Content not found.</p>");
+        }
+    
+        $$('.desktop-icon').forEach(icon => {
+            addEvent(icon, 'click', () => openWindow(icon.querySelector('.desktop-icon-text').textContent));
+        });
+    
+        addEvent(startButton, 'click', () => startMenu.style.display = startMenu.style.display === 'none' ? 'block' : 'none');
+    
+        addEvent(document, 'click', (e) => {
+            if (!startButton.contains(e.target) && !startMenu.contains(e.target)) startMenu.style.display = 'none';
+        });
+    
+        $$('#startMenu button').forEach(button => {
+            addEvent(button, 'click', () => {
+                const windowName = button.dataset.window;
+                if (windowName) {
+                    openWindow(windowName);
+                }
+                startMenu.style.display = 'none';
+            });
+        });
+    </script>
+
+
+</body>
+</html>
